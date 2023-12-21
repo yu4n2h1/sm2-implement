@@ -2,15 +2,18 @@ GMP_IN := -lgmp -lgmpxx -I include
 
 all: bin/main
 
+build/main.o: src/main.cpp
+	@mkdir -p build
+	g++ -c $^ -o $@ $(GMP_IN)
 
 build/lib/%.o: src/lib/%.cpp
 	@mkdir -p build/lib/
 	g++ -c $^ -o $@  $(GMP_IN)
 
 
-build/main.o: tests/main.cpp 
-	@mkdir -p build/
-	g++ -c $^ -o $@ -I include $(GMP_IN)
+# build/main.o: tests/main.cpp 
+# 	@mkdir -p build/
+# 	g++ -c $^ -o $@ -I include $(GMP_IN)
 
 build/lib/mathlib.o:build/lib/finiteField.o build/lib/finiteFieldElement.o build/lib/ellipticCurve.o build/lib/ellipticCurvePoint.o
 	@mkdir -p build/lib/
