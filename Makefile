@@ -10,6 +10,9 @@ build/lib/%.o: src/lib/%.cpp
 	@mkdir -p build/lib/
 	g++ -c $^ -o $@  $(GMP_IN)
 
+# build/sm2/%.o: src/sm2/%.cpp
+# 	@mkdir -p build/sm2/
+# 	g++ -c $^ -o $@  $(GMP_IN)
 
 # build/main.o: tests/main.cpp 
 # 	@mkdir -p build/
@@ -19,7 +22,7 @@ build/lib/mathlib.o:build/lib/finiteField.o build/lib/finiteFieldElement.o build
 	@mkdir -p build/lib/
 	ld -r -o $@ $^
 
-bin/main: build/lib/mathlib.o build/main.o
+bin/main: build/lib/mathlib.o build/main.o # build/sm2/sm2.o
 	@mkdir -p bin/
 	g++ -o bin/main $^ $(GMP_IN)
 

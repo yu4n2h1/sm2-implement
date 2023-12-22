@@ -3,6 +3,7 @@
 #include "finiteFieldElement.hpp"
 #include "ellipticCurve.hpp"
 #include "ellipticCurvePoint.hpp"
+#include "sm2.hpp"
 
 using namespace std;
 
@@ -53,5 +54,6 @@ int main() {
     cout << WW2 << endl;
     EllipticCurvePoint WWWW = W * 4;
     cout << WWWW << endl;
+    cout << SM2Point.point.first << endl;
     return 0;
 }
