@@ -55,5 +55,8 @@ int main() {
     EllipticCurvePoint WWWW = W * 4;
     cout << WWWW << endl;
     cout << SM2Point.point.first << endl;
+    cout << SM2Point.a.modulus << endl;
+    
+    
     return 0;
 }

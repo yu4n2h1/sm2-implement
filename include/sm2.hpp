@@ -10,4 +10,6 @@
 extern EllipticCurvePoint SM2Point;
 extern EllipticCurve SM2;
 
+
+
 #endif // SM2_H

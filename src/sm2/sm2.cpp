@@ -13,4 +13,3 @@ FiniteFieldElement y = F(mpz_class("BC3736A2F4F6779C59BDCEE36B692153D0A9877CC62A
 
 EllipticCurve SM2 = EllipticCurve(a, b, n);
 EllipticCurvePoint SM2Point = EllipticCurvePoint(SM2, x, y);
-
