@@ -2,6 +2,8 @@
 #include <gmpxx.h>
 #include <random>
 #include "verify.hpp"
+#include "sign.hpp"
+#include "sha256.hpp"
 
 using namespace std;
 
@@ -42,5 +44,6 @@ bool verify(string message, string ID_A, FiniteFieldElement &r, FiniteFieldEleme
     if (t == F(mpz_class(0))) {
         return false;
     }
+    
     return true;
 }
