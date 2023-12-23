@@ -122,7 +122,6 @@ step2:
     4. 计算r=(e+x1) mod n，若r=0或r+k=n则返回 2.
     */
     r = (e + G1.a);
-    cout << r << endl;
     FiniteFieldElement k_f = F(k);
     if (r == F(mpz_class(0)) || r + k_f == F(n))
     {
@@ -133,7 +132,6 @@ step2:
     */
     FiniteFieldElement one = F(mpz_class(1));
     s = one / (one + d_A) * (k_f - d_A * r);
-    cout << s << endl;
     if (s == F(mpz_class(0)))
     {
         goto step2;

@@ -5,6 +5,6 @@
 #include <gmpxx.h>
 #include <random>
 
-bool verify(std::string message, FiniteFieldElement r, FiniteFieldElement s, mpz_class pub_key);
+bool verify(std::string message, std::string ID_A, FiniteFieldElement &r, FiniteFieldElement &s);
 
 #endif // VERIFY_H
