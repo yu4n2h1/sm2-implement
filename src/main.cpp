@@ -7,13 +7,16 @@
 
 using namespace std;
 string message;
+string ID_A;
 
-EllipticCurvePoint RS = EllipticCurvePoint();s
+FiniteFieldElement r;
+FiniteFieldElement s;
 
 
 int main() {
     message = "nieshangqing_sign";
-    sign(message, RS, "414C494345313233405941484F4F2E434F4D");
-    cout << RS << endl;
+    ID_A = "414C494345313233405941484F4F2E434F4D";
+    sign(message, ID_A, r, s);
+    cout << r << endl << s << endl;
     return 0;
 }

@@ -49,7 +49,6 @@ vector<unsigned char> hexStringToBytes(const string &hexString)
         bytes.push_back(byte);
     }
     return bytes;
-    
 }
 
 // 将用户标识符 ID_A 转换为字节序列
@@ -91,7 +90,7 @@ mpz_class generateRandomK(const mpz_class &n)
     return k;
 }
 
-void sign(string message, EllipticCurvePoint &RS, string ID_A)
+void sign(string message, string ID_A, FiniteFieldElement &r, FiniteFieldElement &s)
 {
     /*
     1. 设置 M*=Z_A||M 并计算 e = H(M*)
@@ -122,26 +121,25 @@ step2:
     /*
     4. 计算r=(e+x1) mod n，若r=0或r+k=n则返回 2.
     */
-    FiniteFieldElement r = (e + G1.a);
+    r = (e + G1.a);
     cout << r << endl;
     FiniteFieldElement k_f = F(k);
-    if (r == F(mpz_class(0)) || r + k_f == F(n)) {
+    if (r == F(mpz_class(0)) || r + k_f == F(n))
+    {
         goto step2;
     }
     /*
     5. 计算s=(1+ dA)^(-1)·(k − r·dA)mod n，若s=0则返回 2.
     */
     FiniteFieldElement one = F(mpz_class(1));
-    FiniteFieldElement s = one / (one + d_A) * (k_f - d_A * r);
+    s = one / (one + d_A) * (k_f - d_A * r);
     cout << s << endl;
-    if (s == F(mpz_class(0))) {
+    if (s == F(mpz_class(0)))
+    {
         goto step2;
     }
     /*
     6. 返回数字签名 (r,s)
     */
-    RS = EllipticCurvePoint(SM2, r, s);
-    cout << "RS.a: " << RS.a << endl;
-    cout << "RS.b: " << RS.b << endl;
-    cout << "RS: " << RS << endl;
+    return;
 }

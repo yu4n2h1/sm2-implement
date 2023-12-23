@@ -99,5 +99,5 @@ EllipticCurvePoint operator*(const EllipticCurvePoint& a, const mpz_class& b) {
 
 
 std::string EllipticCurvePoint::Out_Hex_xy() {
-    return this->point.first.value.get_str() + this->point.second.value.get_str();
+    return this->point.first.value.get_str(16) + this->point.second.value.get_str(16);
 }

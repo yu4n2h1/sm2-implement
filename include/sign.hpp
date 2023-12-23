@@ -5,6 +5,6 @@
 #include <gmpxx.h>
 #include <random>
 
-void sign(std::string message, EllipticCurvePoint &RS, std::string ID_A);
+void sign(std::string message, std::string ID_A, FiniteFieldElement &r, FiniteFieldElement &s);
 
 #endif // SIGN_H
