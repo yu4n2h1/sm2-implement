@@ -7,9 +7,12 @@
 #include "finiteFieldElement.hpp"
 #include "gmpxx.h"
 
-extern EllipticCurvePoint SM2Point;
+extern FiniteField F;
+
+extern EllipticCurvePoint G;
 extern EllipticCurve SM2;
 
-
+extern EllipticCurvePoint P;
+extern FiniteFieldElement d_A;
 
 #endif // SM2_H

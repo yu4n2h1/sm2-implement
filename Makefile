@@ -1,4 +1,4 @@
-GMP_IN := -lgmp -lgmpxx -I include
+GMP_IN := -lgmp -lgmpxx -lssl -lcrypto -I include
 
 all: bin/main
 
@@ -22,11 +22,11 @@ build/sm2/sm2-sign-imple.o: build/sm2/sm2.o build/sm2/sign.o build/sm2/verify.o
 	@mkdir -p build/sm2
 	ld -r -o $@ $^
 
-build/lib/mathlib.o:build/lib/finiteField.o build/lib/finiteFieldElement.o build/lib/ellipticCurve.o build/lib/ellipticCurvePoint.o
+build/lib/mathlib.o:build/lib/finiteField.o build/lib/finiteFieldElement.o build/lib/ellipticCurve.o build/lib/ellipticCurvePoint.o 
 	@mkdir -p build/lib/
 	ld -r -o $@ $^
 
-bin/main: build/lib/mathlib.o build/main.o build/sm2/sm2-sign-imple.o
+bin/main: build/lib/mathlib.o build/main.o build/sm2/sm2-sign-imple.o build/lib/sha256.o
 	@mkdir -p bin/
 	g++ -o bin/main $^ $(GMP_IN)
 
