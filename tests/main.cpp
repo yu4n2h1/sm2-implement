@@ -4,7 +4,9 @@
 #include "ellipticCurve.hpp"
 #include "ellipticCurvePoint.hpp"
 #include "sm2.hpp"
-
+#include "encrypt.hpp"
+#include "typeinfo"
+#include "sha256.hpp"
 using namespace std;
 
 int main() {
@@ -19,7 +21,7 @@ int main() {
     mpz_class x = mpz_class("32C4AE2C1F1981195F9904466A39C9948FE30BBFF2660BE1715A4589334C74C7", 16);
     mpz_class y = mpz_class("BC3736A2F4F6779C59BDCEE36B692153D0A9877CC62A474002DF32E52139F0A0", 16);
     F = FiniteField(p);
-
+    
     FiniteFieldElement aa, bb ,cc, xx, yy;
     aa = F(a);
     bb = F(b);
@@ -54,9 +56,21 @@ int main() {
     cout << WW2 << endl;
     EllipticCurvePoint WWWW = W * 4;
     cout << WWWW << endl;
-    cout << SM2Point.point.first << endl;
-    cout << SM2Point.a.modulus << endl;
-    
-    
+
+    cout << (mpz_class(3 ) >> 1) << endl;
+    if (mpz_class(3) >> 1 == 1){
+        cout << "Dfsdsfdssdfsfdf" << endl;
+        cout << mpz_sizeinbase(mpz_class(4).get_mpz_t(), 2) << endl;
+        cout << (mpz_class(2) & 1) << endl;
+    }
+    char jian[10000];
+    cout << mpz_class(3).get_str(16) << endl;
+    cout << mpz_class(5).get_str(16) + mpz_class(65).get_str(16) << endl;
+    string adfdsfs =  mpz_class(3).get_str(16);
+    cout << G.Out_Hex_xy() << endl;
+    cout << sha256(G.Out_Hex_xy()) << endl;
+    cout << (mpz_class(2) ^ mpz_class(3)) << endl;
     return 0;
 }
+
+

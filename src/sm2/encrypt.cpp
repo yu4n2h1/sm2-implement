@@ -14,8 +14,9 @@ EllipticCurvePoint encrypt(string M ,int klen) {
     std::string out1 = C1.Out_Hex_xy();
     EllipticCurvePoint kP = P * k; 
     std::string out2 = kP.Out_Hex_xy();
-    string out256 = sha256(out2);
-    mpz_class  = mpz_class(M,16) ^ mpz_class(out2, 16);
-
+    std::string out256 = sha256(out2);
+    mpz_class mpzC2 = mpz_class(M,16) ^ mpz_class(out2, 16);
+    std::string stringC2 = mpzC2.get_str();
+    
     
 }
