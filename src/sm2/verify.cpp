@@ -44,6 +44,19 @@ bool verify(string message, string ID_A, FiniteFieldElement &r, FiniteFieldEleme
     if (t == F(mpz_class(0))) {
         return false;
     }
-    
-    return true;
+    /**
+     * 5. 计算椭圆曲线点 (x1′，y1′)= s′ · G + t · PA
+    */
+    EllipticCurvePoint temp1 = (G * s.value);
+    EllipticCurvePoint temp2 = (P * t.value);
+    EllipticCurvePoint G1 = temp1 + temp2;
+    FiniteFieldElement x1 = G1.a;
+    /**
+     * 6. 计算v=(e′+ x1′) mod n，检验v=r′是否成立，若成立则验证通过；否则验证不通过
+    */
+    FiniteFieldElement v = e + x1;
+    if (v == r) {
+        return true;
+    }
+    return false;
 }
