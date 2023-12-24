@@ -96,8 +96,30 @@ EllipticCurvePoint operator*(const EllipticCurvePoint& a, const mpz_class& b) {
     return res;
 }
 
+EllipticCurvePoint operator*(const EllipticCurvePoint & a, const FiniteFieldElement & b)
+{
+    EllipticCurvePoint res = EllipticCurvePoint(EllipticCurve(a.a,a.b,a.n), FiniteFieldElement(a.a.modulus,a.a.modulus),FiniteFieldElement(a.a.modulus,a.a.modulus));
+    EllipticCurvePoint type = a;
+    mpz_class k = b.value;
+    while (k != 0) {
+        if ((1 & k) == 1) {
+            res = add (res, type);
+        }
+        type = add(type, type);
+        k >>= 1;
+    }
+    return res;
+}
 
 
 std::string EllipticCurvePoint::Out_Hex_xy() {
-    return this->point.first.value.get_str(16) + this->point.second.value.get_str(16);
+    std::string x_str = this->point.first.value.get_str(16);
+    std::string y_str = this->point.second.value.get_str(16);
+
+    // 补零至192位
+    x_str = std::string(48 - x_str.length(), '0') + x_str;
+    y_str = std::string(48 - y_str.length(), '0') + y_str;
+
+    // 拼接并返回结果
+    return x_str + y_str;
 }

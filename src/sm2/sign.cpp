@@ -106,22 +106,28 @@ void sign(string message, string ID_A, FiniteFieldElement &r, FiniteFieldElement
     string Z_A_pre_message = ENTL_A + ID_A + a_string + b_string + G_x_string + G_y_string + P_x_string + P_y_string;
     string Z_A = sha256(Z_A_pre_message);
     string Mmessage = Z_A + message;
+    cout << Mmessage << endl;
     string e_msg = sha256(Mmessage);
     FiniteFieldElement e = F(mpz_class(e_msg, 16));
+    cout << e << endl;
     /*
     2. 产生随机数k∈[1, n-1]
     */
 step2:
     mpz_class n = G.n;
     mpz_class k = generateRandomK(n);
+    cout << k << endl;
     /*
     3. 计算椭圆曲线点G1=k ⋅ G= (x1, y1)
     */
     EllipticCurvePoint G1 = G * k;
+    cout << G1.a << endl;
+    cout << G1.b << endl;
     /*
     4. 计算r=(e+x1) mod n，若r=0或r+k=n则返回 2.
     */
     r = (e + G1.a);
+    cout << r << endl;
     FiniteFieldElement k_f = F(k);
     if (r == F(mpz_class(0)) || r + k_f == F(n))
     {
@@ -132,6 +138,7 @@ step2:
     */
     FiniteFieldElement one = F(mpz_class(1));
     s = one / (one + d_A) * (k_f - d_A * r);
+    cout << s << endl;
     if (s == F(mpz_class(0)))
     {
         goto step2;
@@ -139,5 +146,7 @@ step2:
     /*
     6. 返回数字签名 (r,s)
     */
+    cout << r << endl;
+    cout << s << endl;
     return;
 }

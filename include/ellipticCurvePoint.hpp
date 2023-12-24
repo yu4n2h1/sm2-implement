@@ -38,6 +38,9 @@ public:
     // 友元运算符重载，用于椭圆曲线点的标量乘法
     friend EllipticCurvePoint operator*(const EllipticCurvePoint& a, const mpz_class& b);
 
+    // 友元运算符重载，用于椭圆曲线点的标量乘法
+    friend EllipticCurvePoint operator*(const EllipticCurvePoint& a, const FiniteFieldElement& b);
+
     std::string Out_Hex_xy();
 };
 

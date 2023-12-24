@@ -4,21 +4,12 @@
 
 #include <cstdint>
 #include <vector>
-
+#include <iostream>
 typedef uint32_t Word;
 typedef uint8_t Byte;
 
-class SM3 {
-    private:
-        static void CF(Word* V, Byte* B);
-        static Word P0(Word X);
-        static Word P1(Word X);
-        static Word FF(int j, Word X, Word Y, Word Z);
-        static Word GG(int j, Word X, Word Y, Word Z);
-        static Word T(int j);
-    public:
-        static Word* hash(Byte* input, uint64_t inputLen);
-};
+// Byte HextoByte(std::string input);
 
 
+std::string sm3(const std::string& oinput);
 #endif //SM3_SM3_H

@@ -10,6 +10,14 @@ build/sm2/%.o: src/sm2/%.cpp
 	@mkdir -p build/sm2/
 	g++ -c $^ -o $@  $(GMP_IN)
 
+build/sm3/%.o: src/sm3/%.cpp
+	@mkdir -p build/sm3/
+	g++ -c $^ -o $@  $(GMP_IN)
+
+# build/sm3/sm3.o: build/sm3/sm3.o build/sm3/sm3_riscv.o build/sm3/legacy_sm3.o
+# 	@mkdir -p build/sm3/
+# 	ld -r -o $@ $^
+
 
 build/test.o: tests/main.cpp 
 	@mkdir -p build/
@@ -19,7 +27,7 @@ build/lib/mathlib.o:build/lib/finiteField.o build/lib/finiteFieldElement.o build
 	@mkdir -p build/lib/
 	ld -r -o $@ $^
 
-bin/test: build/lib/mathlib.o build/test.o build/sm2/sm2.o build/sm2/encrypt.o build/lib/sha256.o
+bin/test: build/lib/mathlib.o build/test.o build/sm2/sm2.o build/sm2/encrypt.o build/lib/sha256.o  build/sm3/sm3.o build/sm2/decrypt.o
 	@mkdir -p bin/
 	g++ -o bin/test $^ $(GMP_IN)
 

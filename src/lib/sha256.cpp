@@ -1,7 +1,10 @@
 #include "sha256.hpp"
 
+
+
 std::string sha256(const std::string& input) {
     std::array<unsigned char, SHA256_DIGEST_LENGTH> hash;
+
     SHA256_CTX sha256;
     SHA256_Init(&sha256);
     SHA256_Update(&sha256, input.c_str(), input.length());
@@ -15,3 +18,6 @@ std::string sha256(const std::string& input) {
 
     return hashString.str();
 }
+
+
+

@@ -8,8 +8,31 @@
 #include "typeinfo"
 #include "sha256.hpp"
 #include "encrypt.hpp"
+#include "sm3.hpp"
+#include "decrypt.hpp"
 using namespace std;
 
+
+// int main() {
+//     std::string input = "48656c6c6f2c20776f726c6421"; // 十六进制字符串
+    
+//     // std::vector<unsigned char> bytes = hexToBytes(hexString);
+//     // std::string input(bytes.begin(), bytes.end()); // 将字节转换为字符串
+
+//     std::string hash = sm3(input);
+
+//     std::cout << "SM3 Hash: " << hash << std::endl;
+
+//     return 0;
+// }
+
+// uint8_t* HextoByte(std::string input) {
+//     uint8_t resww[input.length()/2];
+//     for(int i=0;i< input.length(); i+= 2) {
+//         resww[i/2] = (int)(input.at(i) << 8) + (int)(input.at(i+1));
+//     }
+//     return resww;
+// }
 int main() {
 
     EllipticCurve();
@@ -30,54 +53,18 @@ int main() {
     string M = string("656E6372797074696F6E207374616E64617264");
     // 私钥
     dB = F(mpz_class("58892B807074F53FBF67288A1DFAA1AC313455FE60355AFD", 16));
-    // 
-    encrypt(M,G);
+    // 又私钥产生公钥
+    EllipticCurvePoint PB = G * dB;
+    
 
 
-
-  
-
-    // cout << E.a << endl;
-    // cout << E.b << endl;
-    // cout << E.n << endl;
-    // cout << E << endl;
-    // EllipticCurvePoint EE = EllipticCurvePoint(E, xx, yy);
-    // EllipticCurvePoint O = EllipticCurvePoint(E, FiniteFieldElement(p,p),FiniteFieldElement(p,p));
-    // // cout << EE + O << endl;
-    // cout << O << endl;
-    // cout << EE << endl;
-    // EllipticCurvePoint W =  EE + O;
-    // cout << W << endl;
-    // FiniteFieldElement ww =  aa*3;
-    // cout <<ww << endl;
-    // aa*mpz_class(3);
-    // EllipticCurvePoint WW = W + W;
-    // cout << E.a << endl;
-    // cout << E.b << endl;
-    // cout << p << endl;
-    // cout << W << endl;
-    // cout << WW << endl;
-    // EllipticCurvePoint WWW = WW + W;
-    // cout << WWW << endl;
-    // EllipticCurvePoint WW2 =  WWW - W;
-    // cout << WW << endl;
-    // cout << WW2 << endl;
-    // EllipticCurvePoint WWWW = W * 4;
-    // cout << WWWW << endl;
-
-    // cout << (mpz_class(3 ) >> 1) << endl;
-    // if (mpz_class(3) >> 1 == 1){
-    //     cout << "Dfsdsfdssdfsfdf" << endl;
-    //     cout << mpz_sizeinbase(mpz_class(4).get_mpz_t(), 2) << endl;
-    //     cout << (mpz_class(2) & 1) << endl;
-    // }
-    // char jian[10000];
-    // cout << mpz_class(3).get_str(16) << endl;
-    // cout << mpz_class(5).get_str(16) + mpz_class(65).get_str(16) << endl;
-    // string adfdsfs =  mpz_class(3).get_str(16);
-    // cout << G.Out_Hex_xy() << endl;
-    // cout << sha256(G.Out_Hex_xy()) << endl;
-    // cout << (mpz_class(2) ^ mpz_class(3)) << endl;
+    cout << "encrypt:" << encrypt(M, G, PB) << endl;
+    mpz_class k = mpz_class("384F30353073AEECE7A1654330A96204D37982A3E15B2CB5",16);
+    EllipticCurvePoint C1 = G*k;
+    string C2 = string("610567DBD4854F51F4F00ADCC01CFE90B1FB1C");
+    
+    cout << "decrypt: " << decrypt(dB, C1, C2) << endl;
+    
     return 0;
 }
 
