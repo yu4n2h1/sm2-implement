@@ -3,7 +3,6 @@
 #include <iostream>
 #include "sm2.hpp"
 #include "sha256.hpp"
-#include "sha256.hpp"
 #include "sm3.hpp"
 #include <string>
 
